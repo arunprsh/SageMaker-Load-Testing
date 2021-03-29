@@ -87,29 +87,35 @@ def get_headers(time, authorization_headers):
 
 
 def authorize(payload):
+    # Comment out logging when running load test
     date, time = get_date_time()
     canonical_headers = construct_canonical_headers(time)
-    # logging.info(f'[CANONICAL HEADERS: {canonical_headers}]')
+    logging.info(f'[CANONICAL HEADERS: {canonical_headers}]')
 
     canonical_uri = get_canonical_url(conf.SAGEMAKER_ENDPOINT_URL)
     payload_hash = get_payload_hash(payload)
     canonical_request = construct_canonical_request(canonical_uri, canonical_headers, payload_hash)
-    # logging.info(f'[CANONICAL REQ: {canonical_request}]')
+    logging.info(f'[CANONICAL REQ: {canonical_request}]')
 
     credential_scope = get_credential_scope(date)
     string_to_sign = get_string_to_sign(time, credential_scope, canonical_request)
     signing_key = get_signing_key(date)
     signature = get_signature(signing_key, string_to_sign)
-    # logging.info(f'[SIGNATURE: {signature}]')
+    logging.info(f'[SIGNATURE: {signature}]')
 
     authorization_headers = construct_authorization_headers(credential_scope, signature)
-    # logging.info(f'[AUTHORIZATION HEADER: {authorization_headers}]')
+    logging.info(f'[AUTHORIZATION HEADER: {authorization_headers}]')
 
     headers = get_headers(time, authorization_headers)
-    # logging.info(f'[HEADERS: {headers}]')
+    logging.info(f'[HEADERS: {headers}]')
     return headers
 
 
 if __name__ == '__main__':
-    payload = '0.234234,0.234345,0.5634,-0.23535'
+    # Execute this script alone for testing authorize function
+
+    # Use below format for content type=text/csv
+    # payload = '0.234234,0.234345,0.5634,-0.23535'
+    # Use below format for content type=application/json
+    payload = "{'instances': [[-1.1617474484872234,-0.7582725561441886,0.3944614964772361,0.4812270430077439]]}"
     authorize(payload)
