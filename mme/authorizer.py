@@ -89,6 +89,7 @@ def get_headers(time, authorization_headers, target):
 
 
 def authorize(payload, target):
+    # print(payload)
     # Comment out logging when running load test
     date, time = get_date_time()
     canonical_headers = construct_canonical_headers(time)
@@ -117,8 +118,9 @@ if __name__ == '__main__':
     # Execute this script alone for testing authorize function
 
     # Use below format for content type=text/csv
-    # payload = '0.234234,0.234345,0.5634,-0.23535'
+    payload = '0.234234,0.234345,0.5634,-0.23535'
     # Use below format for content type=application/json
+    """
     PAYLOAD = {'instances': [[2.804030096111861,
                               -0.5078493396918523,
                               0.9696087678038148,
@@ -133,4 +135,5 @@ if __name__ == '__main__':
                               -4.278295167692499,
                               2.513247725276389]]}
     payload = json.dumps(PAYLOAD)
+    """
     authorize(payload, 'model2.tar.gz')

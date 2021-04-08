@@ -1,12 +1,14 @@
 HOST = 'runtime.sagemaker.us-east-1.amazonaws.com'
 REGION = 'us-east-1'
 # replace the url below with the sagemaker endpoint you are load testing
-SAGEMAKER_ENDPOINT_URL = 'https://runtime.sagemaker.us-east-1.amazonaws.com/endpoints/mme-tensorflow/invocations'
+SAGEMAKER_ENDPOINT_URL = '<COPY PASTE SAGEMAKER MME ENDPOINT FROM CONSOLE HERE>'
 # ACCESS_KEY = '<USE YOUR AWS ACCESS KEY HERE>'
 # SECRET_KEY = '<USE YOUR AWS SECRET KEY HERE>'
+ACCESS_KEY = '<COPY PASTE YOUR AWS ACCESS KEY HERE>'
+SECRET_KEY = '<COPY PASTE YOUR AWS SECRET KEY HERE>'
 # replace the context type below as per your requirements
-# CONTENT_TYPE = 'text/csv'
-CONTENT_TYPE = 'application/json'
+CONTENT_TYPE = 'text/csv'
+# CONTENT_TYPE = 'application/json'
 # TARGET_MODEL = 'model1.tar.gz'
 METHOD = 'POST'
 SERVICE = 'sagemaker'
